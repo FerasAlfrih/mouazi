@@ -185,11 +185,7 @@
     background-position: center center;
     background-size: cover;*/
 }
-p {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: #B048B5;
-}
+
 
 big {
 
@@ -213,4 +209,22 @@ small {
     text-transform: capitalize;
     font-family: 'Libre Baskerville', serif;
     font-size: 25px;
+}
+#hbible legend, #hletter legend, #hsaint legend{
+    color: #C68E17;
+}
+
+#hbible p, #hletter p, #hsaint p{
+    color: #FDEEF4;
+}
+
+#hbible small, #hletter small, #hsaint small{
+    color: #98AFC7;
+}
+
+#footer{
+    color: #FDEEF4;
+}
+#footer a{
+    color: #FDEEF4;
 }
