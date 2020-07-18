@@ -16,7 +16,7 @@ def bible(request):
              else:
                 m = Bible.objects.get(book=book, chapter=chapter, verse=verse)
                 text = m.text
-            messages.success(request, f"found")
+             messages.success(request, f"found")
         else:
             text = "null"
     else:
