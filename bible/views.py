@@ -18,7 +18,7 @@ def bible(request):
     else:
         text = "null"
     print("text is: ", text)
-    # arName(request)
+    arName(request)
     # x = Bible.objects.get(engName="Genesis")
     # y = Chapter.objects.get(book=x, chapter='1')
     # z = Verse.objects.get(book=x, chapter=y, verse='5')

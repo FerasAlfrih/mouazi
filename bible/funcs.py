@@ -10,16 +10,17 @@ def biReader(args):
 
 
 def biSearch(request):
+
     pass
 
 
 def arName(request):
     bibles = Bible.objects.filter(engName="Leviticus")
-    count = Bible.objects.filter(engName="Leviticus", book="").count()
+    count = Bible.objects.filter(engName="Leviticus", book="الخروج").count()
     if count > 0:
         for b in bibles:
-            b.book = "الخروج"
-            b.code = "خر"
+            b.book = "لاويين"
+            b.code = "لا"
             Bible.save(b)
     messages.success(request, f"database successfully updated")
 
