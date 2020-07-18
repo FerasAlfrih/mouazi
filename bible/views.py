@@ -10,7 +10,7 @@ def bible(request):
         chapter = request.GET.get('chapter')
         verse = request.GET.get('verse')
         if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
-             if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 1:
+             if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() >= 2:
                 m = Bible.objects.get(book=book, chapter=chapter, verse=verse)[0] 
                 text = m.text
              else:
