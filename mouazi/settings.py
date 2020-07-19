@@ -25,7 +25,7 @@ SECRET_KEY = '*lwyk=b!h&labplrb0x3y-ks39$yu4tk()a-63&3)n9!+b)ehf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','mouazi.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'mouazi.herokuapp.com']
 
 
 # Application definition
@@ -37,9 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #my apps
+    # my apps
     'home.apps.HomeConfig',
     'bible.apps.BibleConfig',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +60,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR + '/templates/',
-            ],
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import Bible
-# Register your models here.
+from import_export import resources
+
+
 admin.site.register(Bible)
-# admin.site.register(Chapter)
-# admin.site.register(Verse)
+
+class BiResource(resources.ModelResource):
+
+    class Meta:
+        model = Bible

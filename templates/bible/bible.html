@@ -24,7 +24,11 @@
               </fieldset>
                 <button type="submit" class="btn btn-info">بحث</button>
           </form>
-          <p>
-              {{ text }}
+          <p dir="rtl" >
+            {% for t in text %}
+               {{text.text}}
+            {% endfor %}
+              ({{ code }} {{chap}}: {{ver1}}-{{ver2}} )
+
           </p>
 {%  endblock main %}
