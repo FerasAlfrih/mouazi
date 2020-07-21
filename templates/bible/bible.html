@@ -14,21 +14,31 @@
                 {% endfor %}
               </div>
             </center>
-          {% endif %}
-          <form method="GET" action="/bible/">
-              <legend>البحث عن لآية</legend>
-              <fieldset>
-                  <input type="text" name="book" id="book" placeholder="السفر">
-                  <input type="text" name="chapter" id="chapter" placeholder="الإصحاح">
-                  <input type="text" name="verse" id="verse" placeholder="الآية">
-              </fieldset>
+            {% endif %}
+            <form method="POST" action="/bible/">
+            {% csrf_token %}
+            <legend>البحث عن لآية</legend>
+            <fieldset>
+                <input type="text" name="book" id="book" placeholder="السفر">
+                <input type="text" name="chapter" id="chapter" placeholder="الإصحاح">
+                <input type="text" name="verse" id="verse" placeholder="الآية">
+            </fieldset>
                 <button type="submit" class="btn btn-info">بحث</button>
-          </form>
-          <p dir="rtl" >
-            {% for t in text %}
-               {{text.text}}
-            {% endfor %}
-              ({{ code }} {{chap}}: {{ver1}}-{{ver2}} )
+            </form>
+            <p dir="rtl" >
+            {% if texts %}
+                {% for t in texts %}
+                    {{t}}
+                {% endfor %}
+            {% else %}
+                {{text}}
+            {% endif %}
 
-          </p>
+              ({{ code }} {{chap}}: {% if ver %}
+                                        {{ver}})
+                                    {% elif ver1 %}
+                                        {{ver1}}-{{ver2}})
+                                    {% endif %}
+
+            </p>
 {%  endblock main %}

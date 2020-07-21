@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 
 
 def biReader(args):
-    b, c, v = args.splite()
+    args.split('-', 1)
     pass
 
 

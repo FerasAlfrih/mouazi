@@ -1,5 +1,5 @@
 from django.shortcuts import render
-# from .funcs import arName
+from .funcs import biReader
 from .models import Bible
 from django.contrib import messages
 import re
@@ -10,11 +10,11 @@ def special_match(strg, search=re.compile(r'[^a-z0-9.]').search):
 
 
 def bible(request):
-    if request.method == "GET":
-        book = request.GET.get('book')
-        chapter = request.GET.get('chapter')
-        if request.GET.get('verse'):
-            verse = request.GET.get('verse')
+    if request.method == "POST":
+        book = request.POST.get('book')
+        chapter = request.POST.get('chapter')
+        if request.POST.get('verse'):
+            verse = request.POST.get('verse')
             if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
                 m = Bible.objects.get(book=book, chapter=chapter, verse=verse)
                 text = m.text
@@ -25,6 +25,25 @@ def bible(request):
                     'code': code,
                     'chap': chapter,
                     'ver': verse
+                }
+            elif special_match(verse) == False:
+                ver1 = verse.split('-', 1)[0]
+                ver2 = verse.split('-', 1)[1]
+                cd = Bible.objects.get(book=book, chapter=chapter, verse=ver1)
+                code = cd.code
+                texts = []
+                vers = range(int(ver1), int(ver2) + 1, +1)
+                for vr in vers:
+                    vrt = Bible.objects.get(book=book, chapter=chapter, verse=vr)
+                    txt = vrt.text
+                    vrs = vrt.verse
+                    text = vrs + txt
+                    texts.append(text)
+                context = {
+                    'texts': texts,
+                    'ver1': ver1,
+                    'ver2': ver2,
+                    'code': code,
                 }
             else:
                 text = ""
@@ -40,16 +59,18 @@ def bible(request):
                 texts = []
                 vers = []
                 for m in ms:
-                    text = m.text
+                    txt = m.text
                     vrs = m.verse
-                    texts.append(text: vrs)
+                    text = vrs + txt
+                    texts.append(text)
+                    vers.append(vrs)
                 context = {
-                    'text': texts,
+                    'texts': texts,
                     'code': code,
                     'chap': chapter,
                     'ver1': vers[0],
                     'ver2': vers[-1],
-                    'ver': vers,
+
                 }
             else:
                 text = ""
@@ -70,11 +91,7 @@ def bible(request):
                 'text': text,
                 'code': code,
                 'chap': chapter,
-                'ver': verse
+                'ver': verse,
             }
 
-    # x = Bible.objects.get(engName="Genesis")
-    # y = Chapter.objects.get(book=x, chapter='1')
-    # z = Verse.objects.get(book=x, chapter=y, verse='5')
-
-    return render(request, 'bible/bible.html', context)
+    return render(request, 'bible/bible.html', context,)
