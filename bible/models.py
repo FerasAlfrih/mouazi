@@ -16,7 +16,7 @@ class Bible(models.Model):
         return (self.engName)
 
 
-class GreekBible(models.Model):
+class NA27Bible(models.Model):
     book = models.CharField(max_length=300)
     code = models.CharField(max_length=5)
     engName = models.CharField(max_length=300)

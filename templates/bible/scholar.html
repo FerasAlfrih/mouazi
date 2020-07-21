@@ -24,11 +24,24 @@
                 </fieldset>
                     <button type="submit" class="btn btn-info">بحث</button>
             </form>
-            <p dir="rtl" >
-            {{text}}
-
-              <br>({{ code }} {{chapter}}: {{verse}})
-
-
-            </p>
+            <div dir="rtl" class="float-right">
+                {% if text %}
+                    <span class="float-right">
+                        <h4 class="float-right" style="display: inline;">فان دايك</h4><hr style="background-color: black ">
+                        <p dir="rtl" >
+                            {{text}}
+                            <br>({{ code }} {{chapter}}: {{verse}})
+                        </p>
+                    </span>
+                {% endif %}
+                {% if greek %}
+                    <span class="float-right">
+                        <h4 class="float-right" style="display: inline;">NA27</h4><hr style="background-color: black ">
+                        <p>
+                            {{greek}}
+                            <br>({{ code }} {{chapter}}: {{verse}})
+                        </p>
+                    </span>
+                {% endif %}
+            </div>
 {%  endblock main %}

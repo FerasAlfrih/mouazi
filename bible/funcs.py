@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from .models import Bible, GreekBible
+from .models import Bible, NA27Bible
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -723,8 +723,8 @@ def arName(request):
 
 
 def biBuild(request):
-    GreekBible.objects.all().delete()
-    soup = BeautifulSoup(open('static/files/Na27.xml', encoding='utf8'), "lxml")
+    NA27Bible.objects.all().delete()
+    soup = BeautifulSoup(open('static/files/NA27Bible.xml', encoding='utf8'), "lxml")
 
     books = soup.findAll("biblebook")
     for book in books:
@@ -737,9 +737,9 @@ def biBuild(request):
                 verse = ver['vnumber']
                 text = ver.text
                 print(engName, chapter, ":", verse)
-                vr = GreekBible(chapter=chapter,
-                                engName=engName,
-                                verse=verse,
-                                text=text,
-                                )
+                vr = NA27Bible(chapter=chapter,
+                               engName=engName,
+                               verse=verse,
+                               text=text,
+                               )
                 vr.save()
