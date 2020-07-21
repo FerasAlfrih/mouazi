@@ -7,7 +7,6 @@ from django.views import View
 
 
 class BibleV(View):
-    """docstring for Bible"""
 
     def __init__(self, arg):
         super(Bible, self).__init__()
@@ -20,8 +19,9 @@ class BibleV(View):
             return False
 
     def is_NT(self):
-        NT = ["Matthew" , "Mark" , "Luke" , "John" , "Acts" , "Romans" , "1 C,inthians" , "2 C,inthians" , "Galatians" , "Ephesians" , "Philippians" , "Colossians" , "1 Thessalonians" , "2 Thessalonians" , "1 Timothy" , "2 Timothy" , "Titus" , "Philemon" , "Hebrews" , "James" , "1 Peter" , "2 Peter" , "1 John" , "2 John" , "3 John" , "Jude" , "Revelation"]
-        if self.engName == NT[0:]:
+        NT = NA27Bible.objects.values_list('engName', flat=True).distinct()
+        #["Matthew" , "Mark" , "Luke" , "John" , "Acts" , "Romans" , "1 Corinthians" , "2 Corinthians" , "Galatians" , "Ephesians" , "Philippians" , "Colossians" , "1 Thessalonians" , "2 Thessalonians" , "1 Timothy" , "2 Timothy" , "Titus" , "Philemon" , "Hebrews" , "James" , "1 Peter" , "2 Peter" , "1 John" , "2 John" , "3 John" , "Jude" , "Revelation"]
+        if self.engName in NT:
             return True
         else:
             return False
@@ -38,8 +38,6 @@ class BibleV(View):
             chapter = chapter.strip()
             if Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() == 1:
                 queryset = Bible.objects.get(code=code, chapter=chapter, verse=verse)
-                print(queryset.engName)
-                print(BibleV.is_NT(queryset))
                 book = queryset.book
                 text = queryset.text
                 engName = queryset.engName
@@ -81,8 +79,8 @@ class BibleV(View):
             text = queryset.text
             engName = queryset.engName
             if BibleV.is_NT(queryset):
-                    greek = NA27Bible.objects.get(engName=engName, chapter=chapter, verse=verse)
-                    greek = greek.text
+                greek = NA27Bible.objects.get(engName=engName, chapter=chapter, verse=verse)
+                greek = greek.text
         if BibleV.is_NT(queryset):
             context = {
                 'book': book,
