@@ -1,6 +1,6 @@
 from django.shortcuts import render
-# from .funcs import arName
-from .models import Bible
+from .funcs import biBuild
+from .models import Bible, GreekBible
 from django.contrib import messages
 import re
 from django.views import View
@@ -13,49 +13,55 @@ class BibleV(View):
         super(Bible, self).__init__()
         self.arg = arg
 
+    def oT(self):
+        pass
+    def oT(self):
+        pass
+
     def scholarBible(request):
+        biBuild(request)
+        context = {}
+        # if request.method == "POST":
+        #     q = request.POST.get('query')
+        #     verse = q.split(':', 1)[1]
+        #     verse = verse.strip()
+        #     chap = q.split(':', 1)[0]
+        #     code = chap.split(' ')[0]
+        #     code = code.strip()
+        #     chapter = chap.split(' ')[1]
+        #     chapter = chapter.strip()
+        #     if Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() == 1:
+        #         queryset = Bible.objects.get(code=code, chapter=chapter, verse=verse)
+        #         book = queryset.book
+        #         text = queryset.text
+        #     elif Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() > 1:
+        #         queryset = Bible.objects.filter(code=code, chapter=chapter, verse=verse)[0]
+        #         book = queryset.book
+        #         text = queryset.text
+        #     else:
+        #         book = 'يوحنا'
+        #         code = 'يو'
+        #         chapter = '1'
+        #         verse = '1'
+        #         queryset = Bible.objects.get(book=book, chapter=chapter, verse=verse)
+        #         text = queryset.text
+        #         messages.alert(request, f"Not found")
 
-        if request.method == "POST":
-            q = request.POST.get('query')
-            verse = q.split(':', 1)[1]
-            verse = verse.strip()
-            chap = q.split(':', 1)[0]
-            code = chap.split(' ')[0]
-            code = code.strip()
-            chapter = chap.split(' ')[1]
-            chapter = chapter.strip()
-            if Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() == 1:
-                queryset = Bible.objects.get(code=code, chapter=chapter, verse=verse)
-                book = queryset.book
-                text = queryset.text
-            elif Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() > 1:
-                queryset = Bible.objects.filter(code=code, chapter=chapter, verse=verse)[0]
-                book = queryset.book
-                text = queryset.text
-            else:
-                book = 'يوحنا'
-                code = 'يو'
-                chapter = '1'
-                verse = '1'
-                queryset = Bible.objects.get(book=book, chapter=chapter, verse=verse)
-                text = queryset.text
-                messages.alert(request, f"Not found")
+        # elif request.method == 'GET':
+        #     book = 'يوحنا'
+        #     code = 'يو'
+        #     chapter = '1'
+        #     verse = '1'
+        #     queryset = Bible.objects.get(book=book, chapter=chapter, verse=verse)
+        #     text = queryset.text
+        # context = {
+        #     'book': book,
+        #     'code': code,
+        #     'chapter': chapter,
+        #     'verse': verse,
+        #     'text': text,
 
-        elif request.method == 'GET':
-            book = 'يوحنا'
-            code = 'يو'
-            chapter = '1'
-            verse = '1'
-            queryset = Bible.objects.get(book=book, chapter=chapter, verse=verse)
-            text = queryset.text
-        context = {
-            'book': book,
-            'code': code,
-            'chapter': chapter,
-            'verse': verse,
-            'text': text,
-
-        }
+        # }
         return render(request, 'bible/scholar.html', context)
 
     def special_match(strg, search=re.compile(r'[^a-z0-9.]').search):

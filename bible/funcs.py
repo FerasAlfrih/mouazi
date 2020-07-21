@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from .models import Bible
+from .models import Bible, GreekBible
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 
@@ -16,6 +16,7 @@ def biSearch(request):
 
 
 def arName(request):
+    pass
     # Old Testament
     #  if bl.engName == "Genesis":
     # bs = Bible.objects.filter(engName="Genesis")
@@ -721,27 +722,25 @@ def arName(request):
     # messages.success(request, f"database successfully updated")
 
 
-def biBuild():
-    Bible.objects.all().delete()
-    soup = BeautifulSoup(open('static/files/arbible.xml', encoding='utf8'), "lxml")
+def biBuild(request):
+    GreekBible.objects.all().delete()
+    soup = BeautifulSoup(open('static/files/Na27.xml', encoding='utf8'), "lxml")
 
-    books = soup.findAll("b")
-
+    books = soup.findAll("biblebook")
+    print(books[3])
     for book in books:
-        engName = book['n']
-        enCode = book['id']
-        chapters = book.findAll('c')
+        engName = book['bname']
+        chapters = book.findAll('chapter')
         for chapt in chapters:
-            chapter = chapt['n']
-            verses = chapt.findAll('v')
+            chapter = chapt['cnumber']
+            verses = chapt.findAll('vers')
             for ver in verses:
-                verse = ver['n']
+                verse = ver['vnumber']
                 text = ver.text
-                chapter = chapter
-                book = engName
-                vr = Bible(chapter=chapter,
-                           engName=engName,
-                           verse=verse,
-                           text=text,
-                           enCode=enCode)
+                print(engName, chapter, ":", verse)
+                vr = GreekBible(chapter=chapter,
+                                engName=engName,
+                                verse=verse,
+                                text=text,
+                                )
                 vr.save()
