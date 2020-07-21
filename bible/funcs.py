@@ -727,7 +727,6 @@ def biBuild(request):
     soup = BeautifulSoup(open('static/files/Na27.xml', encoding='utf8'), "lxml")
 
     books = soup.findAll("biblebook")
-    print(books[3])
     for book in books:
         engName = book['bname']
         chapters = book.findAll('chapter')
