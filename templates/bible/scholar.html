@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{%  block title %}
+<title>الكتاب المقدس  البحثي</title>
+{%  endblock title %}
+{%  block main %}
+    {% if messages %}
+            <center>
+              <div class="col-lg-4 my-3 my-lg-0">
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}">
+                    <small>{{ message }}</small>
+                  </div>
+                {% endfor %}
+              </div>
+            </center>
+            {% endif %}
+            <form method="POST" action="">
+                {% csrf_token %}
+                <legend>البحث عن لآية</legend>
+                <fieldset>
+                    <input type="text" name="query" id="query" placeholder="أدخل اللآية وفق النموذج"/><br>
+                    <label class="float-right">يو 1: 1</label>
+                </fieldset>
+                    <button type="submit" class="btn btn-info">بحث</button>
+            </form>
+            <p dir="rtl" >
+            {{text}}
+
+              <br>({{ code }} {{chapter}}: {{verse}})
+
+
+            </p>
+{%  endblock main %}

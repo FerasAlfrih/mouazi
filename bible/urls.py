@@ -1,10 +1,11 @@
 from django.urls import path
-from . import views
+from .views import BibleV
 
 
 urlpatterns = [
-    path('', views.bible, name='bible'),
-    path('bible/', views.bible, name='bible'),
+    path('', BibleV.bible, name='bible'),
+    path('StudyBible/', BibleV.scholarBible, name='scholar'),
+
     #
 
 ]
