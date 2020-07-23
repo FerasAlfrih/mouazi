@@ -35,11 +35,13 @@ class BibleV(View):
             q = request.POST.get('query')
             verse = q.split(':', 1)[1]
             verse = verse.strip()
+            verse = int(verse)
             chap = q.split(':', 1)[0]
             code = chap.split(' ')[0]
             code = code.strip()
             chapter = chap.split(' ')[1]
             chapter = chapter.strip()
+            chapter = int(chapter)
             if Bible.objects.filter(code=code, chapter=chapter, verse=verse).count() == 1:
                 queryset = Bible.objects.get(
                     code=code, chapter=chapter, verse=verse)
