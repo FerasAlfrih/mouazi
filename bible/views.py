@@ -157,20 +157,7 @@ class BibleV(View):
             chapter = int(chapter)
             if request.POST.get('verse'):
                 verse = request.POST.get('verse')
-                verse = int(verse)
-                if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
-                    m = Bible.objects.get(
-                        book=book, chapter=chapter, verse=verse)
-                    text = m.text
-                    code = m.code
-                    messages.success(request, f"Found")
-                    context = {
-                        'text': text,
-                        'code': code,
-                        'chap': chapter,
-                        'ver': verse
-                    }
-                elif BibleV.special_match(verse) == False:
+                if BibleV.special_match(verse) == False:
                     ver1 = verse.split('-', 1)[0]
                     ver1 = int(ver1)
                     ver2 = verse.split('-', 1)[1]
@@ -192,6 +179,19 @@ class BibleV(View):
                         'ver1': ver1,
                         'ver2': ver2,
                         'code': code,
+                    }
+                elif Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
+                    verse = int(verse)
+                    m = Bible.objects.get(
+                        book=book, chapter=chapter, verse=verse)
+                    text = m.text
+                    code = m.code
+                    messages.success(request, f"Found")
+                    context = {
+                        'text': text,
+                        'code': code,
+                        'chap': chapter,
+                        'ver': verse
                     }
                 else:
                     text = ""
