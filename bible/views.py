@@ -154,8 +154,10 @@ class BibleV(View):
         if request.method == "POST":
             book = request.POST.get('book')
             chapter = request.POST.get('chapter')
+            chapter = int(chapter)
             if request.POST.get('verse'):
                 verse = request.POST.get('verse')
+                verse = int(verse)
                 if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
                     m = Bible.objects.get(
                         book=book, chapter=chapter, verse=verse)
@@ -170,7 +172,9 @@ class BibleV(View):
                     }
                 elif BibleV.special_match(verse) == False:
                     ver1 = verse.split('-', 1)[0]
+                    ver1 = int(ver1)
                     ver2 = verse.split('-', 1)[1]
+                    ver2 = int(ver2)
                     cd = Bible.objects.get(
                         book=book, chapter=chapter, verse=ver1)
                     code = cd.code
@@ -227,16 +231,16 @@ class BibleV(View):
             book = "يوحنا"
             chapter = "1"
             verse = "1"
-            if Bible.objects.filter(book=book, chapter=chapter, verse=verse).count() > 0:
-                m = Bible.objects.get(book=book, chapter=chapter, verse=verse)
-                text = m.text
-                code = m.code
-                messages.success(request, f"Found")
-                context = {
-                    'text': text,
-                    'code': code,
-                    'chap': chapter,
-                    'ver': verse,
-                }
+
+            m = Bible.objects.get(book=book, chapter=chapter, verse=verse)
+            text = m.text
+            code = m.code
+            messages.success(request, f"Found")
+            context = {
+                'text': text,
+                'code': code,
+                'chap': chapter,
+                'ver': verse,
+            }
 
         return render(request, 'bible/bible.html', context,)
