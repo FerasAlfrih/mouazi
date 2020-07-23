@@ -43,5 +43,23 @@
                         </p>
                     </span>
                 {% endif %}
+                {% if LXX %}
+                    <span class="float-right">
+                        <h4 class="float-right" style="display: inline;">LXX</h4><hr style="background-color: black ">
+                        <p>
+                            {{LXX}}
+                            <br>({{ code }} {{chapter}}: {{verse}})
+                        </p>
+                    </span>
+                {% endif %}
+                 {% if VUL %}
+                    <span class="float-right">
+                        <h4 class="float-right" style="display: inline;">Vulgata</h4><hr style="background-color: black ">
+                        <p>
+                            {{VUL}}
+                            <br>({{ code }} {{chapter}}: {{verse}})
+                        </p>
+                    </span>
+                {% endif %}
             </div>
 {%  endblock main %}
