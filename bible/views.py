@@ -1,8 +1,11 @@
 from django.shortcuts import render
-from .funcs import biBuild
-from .models import Bible, NA27Bible
 from django.contrib import messages
+
 import re
+import requests
+from bs4 import BeautifulSoup
+
+from .models import Bible, NA27Bible, LXXBible, VULBible
 from django.views import View
 
 
@@ -12,15 +15,16 @@ class BibleV(View):
         super(Bible, self).__init__()
         self.arg = arg
 
+
     def is_OT(self):
-        if self.engName == "Matthew" or "Mark" or "Luke" or "John" or "Acts" or "Romans" or "1 Corinthians" or "2 Corinthians" or "Galatians" or "Ephesians" or "Philippians" or "Colossians" or "1 Thessalonians" or "2 Thessalonians" or "1 Timothy" or "2 Timothy" or "Titus" or "Philemon" or "Hebrews" or "James" or "1 Peter" or "2 Peter" or "1 John" or "2 John" or "3 John" or "Jude" or "Revelation":
+        OT = LXXBible.objects.values_list('engName', flat=True).distinct()
+        if self.engName in OT:
             return True
         else:
             return False
 
     def is_NT(self):
         NT = NA27Bible.objects.values_list('engName', flat=True).distinct()
-        #["Matthew" , "Mark" , "Luke" , "John" , "Acts" , "Romans" , "1 Corinthians" , "2 Corinthians" , "Galatians" , "Ephesians" , "Philippians" , "Colossians" , "1 Thessalonians" , "2 Thessalonians" , "1 Timothy" , "2 Timothy" , "Titus" , "Philemon" , "Hebrews" , "James" , "1 Peter" , "2 Peter" , "1 John" , "2 John" , "3 John" , "Jude" , "Revelation"]
         if self.engName in NT:
             return True
         else:

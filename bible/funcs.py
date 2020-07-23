@@ -5,6 +5,77 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 
 
+def biBuild(request):
+    LXXBible.objects.all().delete()
+    soup = BeautifulSoup(open('static/files/LXXBible.xml', encoding='utf8'), "lxml")
+
+    books = soup.findAll("biblebook")
+    for book in books:
+        engName = book['bname']
+        enCode = book['bsname']
+        chapters = book.findAll('chapter')
+        for chapt in chapters:
+            chapter = chapt['cnumber']
+            verses = chapt.findAll('vers')
+            for ver in verses:
+                verse = ver['vnumber']
+                text = ver.text
+                print(engName, chapter, ":", verse)
+                vr = LXXBible(chapter=chapter,
+                              engName=engName,
+                              verse=verse,
+                              text=text,
+                              )
+                vr.save()
+
+
+def biBuild2(request):
+    VULBible.objects.all().delete()
+    soup = BeautifulSoup(open('static/files/VulgataBible.xml', encoding='utf8'), "lxml")
+
+    books = soup.findAll("biblebook")
+    for book in books:
+        engName = book['bname']
+        enCode = book['bsname']
+        chapters = book.findAll('chapter')
+        for chapt in chapters:
+            chapter = chapt['cnumber']
+            verses = chapt.findAll('vers')
+            for ver in verses:
+                verse = ver['vnumber']
+                text = ver.text
+                print(engName, chapter, ":", verse)
+                vr = VULBible(chapter=chapter,
+                              engName=engName,
+                              verse=verse,
+                              text=text,
+                              )
+                vr.save()
+
+
+def biBuild3(request):
+    NA27Bible.objects.all().delete()
+    soup = BeautifulSoup(open('static/files/Na27.xml', encoding='utf8'), "lxml")
+
+    books = soup.findAll("biblebook")
+    for book in books:
+        engName = book['bname']
+        chapters = book.findAll('chapter')
+        for chapt in chapters:
+            chapter = chapt['cnumber']
+            verses = chapt.findAll('vers')
+            for ver in verses:
+                verse = ver['vnumber']
+                text = ver.text
+                print(engName, chapter, ":", verse)
+                vr = NA27Bible(chapter=chapter,
+                               engName=engName,
+                               verse=verse,
+                               text=text,
+                               )
+                vr.save()
+
+
 def biReader(str):
     str.split('-', 1)
     pass
@@ -720,26 +791,3 @@ def arName(request):
     #         break
 
     # messages.success(request, f"database successfully updated")
-
-
-def biBuild(request):
-    NA27Bible.objects.all().delete()
-    soup = BeautifulSoup(open('static/files/NA27Bible.xml', encoding='utf8'), "lxml")
-
-    books = soup.findAll("biblebook")
-    for book in books:
-        engName = book['bname']
-        chapters = book.findAll('chapter')
-        for chapt in chapters:
-            chapter = chapt['cnumber']
-            verses = chapt.findAll('vers')
-            for ver in verses:
-                verse = ver['vnumber']
-                text = ver.text
-                print(engName, chapter, ":", verse)
-                vr = NA27Bible(chapter=chapter,
-                               engName=engName,
-                               verse=verse,
-                               text=text,
-                               )
-                vr.save()

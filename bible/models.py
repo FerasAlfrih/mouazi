@@ -28,6 +28,30 @@ class NA27Bible(models.Model):
         return (self.engName)
 
 
+class LXXBible(models.Model):
+    book = models.CharField(max_length=300)
+    code = models.CharField(max_length=5)
+    engName = models.CharField(max_length=300)
+    chapter = models.CharField(max_length=3)
+    verse = models.CharField(max_length=3)
+    text = models.TextField()
+
+    def __str__(self):
+        return (self.engName)
+
+
+class VULBible(models.Model):
+    book = models.CharField(max_length=300)
+    code = models.CharField(max_length=5)
+    engName = models.CharField(max_length=300)
+    chapter = models.CharField(max_length=3)
+    verse = models.CharField(max_length=3)
+    text = models.TextField()
+
+    def __str__(self):
+        return (self.engName)
+
+
 # class Chapter(models.Model):
 #     book = models.ForeignKey(Bible, on_delete=models.CASCADE)
 #     chapter = models.CharField(max_length=3)
