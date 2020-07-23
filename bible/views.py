@@ -72,7 +72,7 @@ class BibleV(View):
                 if BibleV.is_NT(queryset):
                     greek = NA27Bible.objects.get(engName=engName, chapter=chapter, verse=verse)
                     greek = greek.text
-                messages.alert(request, f"Not found")
+                messages.warning(request, f"Not found")
 
         elif request.method == 'GET':
             book = 'يوحنا'
