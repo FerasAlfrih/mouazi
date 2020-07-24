@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.views import View
 
 import re
 import requests
 from bs4 import BeautifulSoup
 
 from .models import Bible, NA27Bible, LXXBible, VULBible
-from django.views import View
 
 
 class BibleV(View):

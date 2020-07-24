@@ -155,7 +155,9 @@
                 </dl>
             </div>
             <div class="col-lg-3 my-3 my-lg-0">
-                {% block  main %}
+            {% block  main %}
+
+                {% block  main1 %}
 
                 {% endblock %}
             </div>
@@ -163,6 +165,7 @@
                 {% block  main2 %}
 
                 {% endblock %}
+            {% endblock  main %}
             </div>
             <div class="col-lg-3 text-lg-right">
                 <img src="{% static 'img/left-icon.jpg' %}" width="300">

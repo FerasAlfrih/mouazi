@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # my apps
     'home.apps.HomeConfig',
     'bible.apps.BibleConfig',
+    'users.apps.UsersConfig',
 
 
 ]
