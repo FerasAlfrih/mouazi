@@ -5,6 +5,7 @@
 
 
 {% block  main %}
+    {% block main1%}
     <div id="hbible" class="float-right text-right">
         <legend>أنجيل اليوم</legend>
         <p>
@@ -37,7 +38,7 @@
     		القديس باييسيوس الآثوسي
     	</p>
     </div>
-{% endblock %}
+{% endblock main1 %}
 {% block  main2 %}
     <div id="hletter" class="float-right text-right">
         <legend>رسالة اليوم</legend>
@@ -60,4 +61,5 @@
             (1كو 13: 1-13)
         </small>
     </div>
-{% endblock %}
+{% endblock main2 %}
+{% endblock main %}

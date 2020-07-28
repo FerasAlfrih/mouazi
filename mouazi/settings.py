@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'bible.apps.BibleConfig',
     'users.apps.UsersConfig',
+    'crispy_forms',
 
 
 ]
