@@ -6,6 +6,7 @@ from django.contrib.auth.forms import  AuthenticationForm
 
 def home(request, resource):
 		form =AuthenticationForm(request.POST)
+		
 		# if request.method == 'POST':
 		# 	username = request.POST['username']
 		# 	password = request.POST['password']
@@ -26,6 +27,6 @@ def home(request, resource):
 		# 	messages.success(request,f'GET Method')  
 		context ={
 			'form':form,
-			'user': User.objects.all(),
+			
 		}	
 		return render (request,'home/home.html', context)

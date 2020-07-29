@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.views import View
 from .forms import UserRegisterForm
+from django.contrib.auth.decorators import login_required
 
 
 class UsersV(View):
@@ -24,3 +25,9 @@ class UsersV(View):
         else:
             form = UserRegisterForm()
         return render(request, 'users/register.html', {'form': form})
+
+
+    @login_required
+    def profile (request):
+        context={}
+        return render(request, 'users/profile.html',context)

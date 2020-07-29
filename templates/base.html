@@ -57,7 +57,7 @@
                         </table>
                     </span>
                 <div class="dropdown-menu nav-item ml-2 bg-dark rounded" aria-labelledby="prflimg">
-                    <a class="nav-item nav-link  dropdown-item text-light" href="">Profile</a>
+                    <a class="nav-item nav-link  dropdown-item text-light" href="{% url 'profile' %}">Profile</a>
                     <a class="nav-item nav-link  dropdown-item text-light" href="">My Posts</a>
                     <a class="nav-item nav-link  dropdown-item text-light" href="">Personal Info</a>
                     <div class="dropdown-divider">
@@ -157,7 +157,7 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-            {% block  main %}
+            {% block  content %}
             <div class="col-lg-3 my-3 my-lg-0 ">    
                 {% block  main1 %}
 
@@ -169,7 +169,7 @@
                 {% endblock main2 %}
             
             </div>
-            {% endblock main %}            
+            {% endblock content %}            
         </main>
         <footer id="footer " class="mt-5 mb-5 fix-bottom ">
             <div class="container ">
