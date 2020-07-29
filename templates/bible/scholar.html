@@ -1,65 +1,50 @@
-{% extends 'base.html' %}
-{% load static %}
-{%  block title %}
-<title>الكتاب المقدس  البحثي</title>
-{%  endblock title %}
-{%  block content %}
-    {% if messages %}
-            <center>
-              <div class="col-lg-4 my-3 my-lg-0">
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }}">
-                    <small>{{ message }}</small>
-                  </div>
-                {% endfor %}
-              </div>
-            </center>
-            {% endif %}
+{% extends 'base.html' %} {% load static %} {% block title %}
+<title>الكتاب المقدس البحثي</title>
+{% endblock title %} {% block content %}
+<center>
+    <div class="scholar" dir="rtl">
+        <div class="scholar-search">
             <form method="POST" action="">
                 {% csrf_token %}
                 <legend>البحث عن لآية</legend>
                 <fieldset>
-                    <input type="text" name="query" id="query" placeholder="أدخل اللآية وفق النموذج"/><br>
-                    <label class="float-right">يو 1: 1</label>
+                    <input type="text" name="query" id="query" placeholder="أدخل اللآية وفق النموذج" /><br>
+                    <label>يو 1: 1</label>
                 </fieldset>
-                    <button type="submit" class="btn btn-info">بحث</button>
+                <button type="submit" class="btn btn-info">بحث</button>
             </form>
-            <div dir="rtl" class="float-right">
-                {% if text %}
-                    <span class="float-right">
-                        <h4 class="float-right" style="display: inline;">فان دايك</h4><hr style="background-color: black ">
+        </div>
+        <div class="scholar-item" dir="rtl">
+            {% if text %}
+            <span>
+                        <h4  style="display: inline;">فان دايك</h4><hr style="background-color: black ">
                         <p dir="rtl" >
                             {{text}}
                             <br>({{ code }} {{chapter}}: {{verse}})
                         </p>
-                    </span>
-                {% endif %}
-                {% if greek %}
-                    <span class="float-right">
-                        <h4 class="float-right" style="display: inline;">NA27</h4><hr style="background-color: black ">
+                    </span> {% endif %} {% if greek %}
+            <span>
+                        <h4  style="display: inline; ">NA27</h4><hr style="background-color: black ">
                         <p>
                             {{greek}}
                             <br>({{ code }} {{chapter}}: {{verse}})
                         </p>
-                    </span>
-                {% endif %}
-                {% if LXX %}
-                    <span class="float-right">
-                        <h4 class="float-right" style="display: inline;">LXX</h4><hr style="background-color: black ">
+                    </span> {% endif %} {% if LXX %}
+            <span>
+                        <h4  style="display: inline;">LXX</h4><hr style="background-color: black ">
                         <p>
                             {{LXX}}
                             <br>({{ code }} {{chapter}}: {{verse}})
                         </p>
-                    </span>
-                {% endif %}
-                 {% if VUL %}
-                    <span class="float-right">
-                        <h4 class="float-right" style="display: inline;">Vulgata</h4><hr style="background-color: black ">
+                    </span> {% endif %} {% if VUL %}
+            <span>
+                        <h4  style="display: inline;">Vulgata</h4><hr style="background-color: black ">
                         <p>
                             {{VUL}}
                             <br>({{ code }} {{chapter}}: {{verse}})
                         </p>
-                    </span>
-                {% endif %}
-            </div>
-{%  endblock content %}
+                    </span> {% endif %}
+        </div>
+    </div>
+</center>
+{% endblock content %}
