@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'bible.apps.BibleConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'django_countries',
 
 
 ]
@@ -133,6 +134,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+MEDIA_URL='/media/'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'

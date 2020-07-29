@@ -3,8 +3,7 @@
 {% block title %}
 <title> register</title>
 {% endblock title %}
-{% block main %}
-<h1>1</h1>
+{% block content %}
     <div class="content-section">
         <form method="POST">
             {% csrf_token %}
@@ -12,7 +11,8 @@
                 <legend class="border-bottom mb-4">Join Today</legend><bbr/><br/>
 
                 <h5 class="border-bottom text-primary"> Account Info </h5>
-                               {{ form|crispy }}<br/>
+                               {{ form|crispy }}
+                               <br/>  
 
                 </fieldset>
             <div class="form-group">
@@ -25,4 +25,4 @@
             </small>
         </div>
     </div>
-{% endblock main %}
+{% endblock content %}
